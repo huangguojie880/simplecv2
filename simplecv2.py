@@ -92,3 +92,19 @@ def imrotate(img,angle):
     img_new = img_new.rotate(angle, expand=1)
     img_new = np.array(img_new)
     return img_new
+
+def imedge(img, low = 50, high = 100):
+	'''
+	Use canny to get the edge of the image
+	:param img: gray or rgb
+	:param low:Canny's low threshold
+	:param high:Canny's high threshold
+	:return:edge img
+	'''
+	img_shape = img.shape
+	if len(img_shape) == 3:
+		gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+	else:
+		gray = img
+	canny = cv2.Canny(gray,low, high)
+	return canny
