@@ -93,7 +93,7 @@ def imrotate(img,angle):
     img_new = np.array(img_new)
     return img_new
 
-def imedge(img, low = 50, high = 100):
+def imedge_canny(img, low = 50, high = 100):
 	'''
 	Use canny to get the edge of the image
 	:param img: gray or rgb
