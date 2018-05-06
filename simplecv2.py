@@ -109,7 +109,7 @@ def imedge_canny(img, low = 50, high = 100):
 	'''
 	img_shape = img.shape
 	if len(img_shape) == 3:
-		gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+		gray = cv2.cvtColor(np.uint8(img), cv2.COLOR_BGR2GRAY)
 	else:
 		gray = img
 	canny = cv2.Canny(gray,low, high)
