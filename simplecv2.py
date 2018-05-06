@@ -62,13 +62,19 @@ def imcrop(img, box):
       A numpy array, img after crop.
     `[new_height, new_width, channels]`.
     """
+    img_shape = img.shape
     x1 = box[0]
     y1 = box[1]
     x2 = box[2]
     y2 = box[3]
     if x1 >= x2 or y1 >= y2:
         raise ('Error:The coordinates of the upper left point are not less than the coordinates of the lower right point')
-    img_new = img[y1:y2, x1:x2, :]
+    if len(img_shape)== 3:
+        img_new = img[y1:y2, x1:x2, :]
+    elsif len(img_shape)== 2:
+	img_new = img[y1:y2, x1:x2]
+    else:
+	raise ('Error:img must 2D or 3D')
     return img_new
 
 def imshow(img):
@@ -108,3 +114,18 @@ def imedge_canny(img, low = 50, high = 100):
 		gray = img
 	canny = cv2.Canny(gray,low, high)
 	return canny
+
+def imextremum(img,type = 'max'):
+    '''
+    Find the maximum or minimum value of the picture
+    :param img: -
+    :param type: 'max' or 'min'
+    :return:extremum
+    '''
+    if type == 'max':
+        value = np.max(img)
+    elif type == 'min':
+        value = np.min(img)
+    else:
+        raise ('Error:Type must be one of max or min')
+    return value
