@@ -139,7 +139,6 @@ def imextremum(img, type='max'):
 def mergeedge(img, edge):
 	'''
 	Merge img and edge pictures.
-	Img and edge pictures must be normalized.
 	:param img:Original image,2D or 3D
 	:param edge:Edge image,2D
 	:return:Merge image
@@ -148,16 +147,14 @@ def mergeedge(img, edge):
 	edge_shape = edge.shape
 	if img_shape[0] != edge_shape[0] or img_shape[1] != edge_shape[1]:
 		raise ('Error:pictures img and edge must be the same size')
-	if imextremum(img) > 1 or imextremum(edge) > 1:
-		raise ('Error:pictures img and edge must be normalized to 0 to 1')
 	if len(edge_shape) != 2:
 		raise ('Error:edge must 2D')
 	if len(img_shape) == 3:
-		img[:, :, 0] = np.minimum(img[:, :, 0] + edge, 1)
-		img[:, :, 1] = np.minimum(img[:, :, 1] + edge, 1)
-		img[:, :, 2] = np.minimum(img[:, :, 2] + edge, 1)
+		img[:, :, 0] = np.minimum(img[:, :, 0] + edge, 255)
+		img[:, :, 1] = np.minimum(img[:, :, 1] + edge, 255)
+		img[:, :, 2] = np.minimum(img[:, :, 2] + edge, 255)
 	elif len(img_shape) == 2:
-		img = np.minimum(img + edge, 1)
+		img = np.minimum(img + edge, 255)
 	else:
 		raise ('Error:img must 2D or 3D')
 	return img
