@@ -53,37 +53,36 @@ def resize_image_with_crop_or_pad(img, targe):
 
 
 def imcrop(img, box):
-	"""Crop a picture by specifying the coordinates of the
-	 top-left point and the coordinates of the bottom-right point.
-	 Horizontal x axis and vertical y axis.
-	Args:
-	  img: 2D or 3D
-	  box: tuple(x1,y1,x2,y2):(x1,y1)is top_left_point,(x2,y2)is right_lower_point
-	Returns:
-	  A numpy array, img after crop.
-	`[new_height, new_width, channels]`.
-	"""
-	img_shape = img.shape
-	box = np.maximum(box,0)
-	box[0] = np.minimum(box[0],img_shape[1])
-	box[1] = np.minimum(box[1], img_shape[0])
-	box[2] = np.minimum(box[2], img_shape[1])
-	box[3] = np.minimum(box[3], img_shape[0])
-	x1 = box[0]
-	y1 = box[1]
-	x2 = box[2]
-	y2 = box[3]
-	if x1 > x2 or y1 > y2:
-		raise (
-		'Error:The coordinates of the upper left point are not less than the coordinates of the lower right point')
-	if len(img_shape) == 3:
-		img_new = img[y1:y2, x1:x2, :]
-	elif len(img_shape) == 2:
-		img_new = img[y1:y2, x1:x2]
-	else:
-		raise ('Error:img must 2D or 3D')
-	return img_new
-
+    """Crop a picture by specifying the coordinates of the
+     top-left point and the coordinates of the bottom-right point.
+     Horizontal x axis and vertical y axis.
+    Args:
+      img: 2D or 3D
+      box: tuple(x1,y1,x2,y2):(x1,y1)is top_left_point,(x2,y2)is right_lower_point
+    Returns:
+      A numpy array, img after crop.
+    `[new_height, new_width, channels]`.
+    """
+    img_shape = img.shape
+    box = np.maximum(box,0)
+    box[0] = np.minimum(box[0],img_shape[1])
+    box[1] = np.minimum(box[1], img_shape[0])
+    box[2] = np.minimum(box[2], img_shape[1])
+    box[3] = np.minimum(box[3], img_shape[0])
+    x1 = box[0]
+    y1 = box[1]
+    x2 = box[2]
+    y2 = box[3]
+    if x1 > x2 or y1 > y2:
+        raise (
+        'Error:The coordinates of the upper left point are not less than the coordinates of the lower right point')
+    if len(img_shape) == 3:
+        img_new = img[y1:y2, x1:x2, :]
+    elif len(img_shape) == 2:
+        img_new = img[y1:y2, x1:x2]
+    else:
+        raise ('Error:img must 2D or 3D')
+    return img_new
 
 def imshow(img):
 	'''
