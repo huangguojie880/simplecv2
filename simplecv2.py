@@ -22,6 +22,9 @@ def resize_image_with_crop_or_pad(img, targe):
     """
     targe_w = targe[0]
     targe_h = targe[1]
+    imgShape_len = len(img.shape)
+    if imgShape_len == 2:
+        img = np.expand_dims(img,axis=-1)
     h, w, deep_dim = img.shape[0], img.shape[1], img.shape[2]
     w_half = int(np.floor(w / 2))
     h_half = int(np.floor(h / 2))
@@ -49,6 +52,8 @@ def resize_image_with_crop_or_pad(img, targe):
         w_s = 0
         w_e = w + 1
     img_new[targe_h_s:targe_h_e, targe_w_s:targe_w_e, :] = (img[h_s:h_e, w_s:w_e, :])
+    if imgShape_len == 2:
+        img_new = img_new[:,:,0]
     return img_new
 
 
