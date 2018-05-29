@@ -20,8 +20,8 @@ def resize_image_with_crop_or_pad(img, targe):
       a 3-D uint8 shape.
     [new_height, new_width, channels]`.
     """
-    targe_w = targe[0]
-    targe_h = targe[1]
+    targe_w = np.int(targe[0])
+    targe_h = np.int(targe[1])
     imgShape_len = len(img.shape)
     if imgShape_len == 2:
         img = np.expand_dims(img,axis=-1)
