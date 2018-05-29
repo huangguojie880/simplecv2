@@ -74,10 +74,10 @@ def imcrop(img, box):
     box[1] = np.minimum(box[1], img_shape[0])
     box[2] = np.minimum(box[2], img_shape[1])
     box[3] = np.minimum(box[3], img_shape[0])
-    x1 = box[0]
-    y1 = box[1]
-    x2 = box[2]
-    y2 = box[3]
+    x1 = int(box[0])
+    y1 = int(box[1])
+    x2 = int(box[2])
+    y2 = int(box[3])
     if x1 > x2 or y1 > y2:
         raise (
         'Error:The coordinates of the upper left point are not less than the coordinates of the lower right point')
